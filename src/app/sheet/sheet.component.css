@@ -1,0 +1,11 @@
+cell {
+  display: inline-block;
+  vertical-align: top;
+  width: 40px;
+  height: 40px;
+  border: solid 2px #e6e6e6;
+  font-size: 9px;
+}
+cell.selected {
+  border: solid 2px #9ec0f7;
+}

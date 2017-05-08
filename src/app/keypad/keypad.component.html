@@ -1,0 +1,33 @@
+<div class="container">
+  <p class="information">row: {{cell.row}}, column: {{cell.column}}</p>
+  <p class="information">note: {{cell.noteNumbers.length}} / 4</p>
+  <div>
+    <ul class="button-list">
+      <li 
+        class="horizontal-button" 
+        [class.active]="isInputMode()"
+        (click)="setInputMode()"
+      >Input</li>
+      <li 
+        class="horizontal-button" 
+        [class.active]="isNoteMode()"
+        (click)="setNoteMode()"
+      >Note</li>
+      <li 
+        class="horizontal-button"
+        (click)="clear()"
+      >Clear</li>
+    </ul>
+  </div>
+  <div>
+    <ul class="button-list"
+      *ngFor="let row of [0,1,2]">
+      <li *ngFor="let number of [1 + (row * 3),2 + (row * 3), 3 + (row * 3)];"
+        class="horizontal-button number"
+        [class.active]="isActiveNumber(number)"
+        [class.note]="isNoteNumber(number)"
+        (click)="numberSelected(number)"
+        >{{number}}</li>
+    </ul>
+  </div>
+</div>

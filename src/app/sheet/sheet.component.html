@@ -1,0 +1,14 @@
+<div *ngFor="let cells of sheet.cells;let row=index;">
+  <cell
+    *ngFor="let cell of cells;let column=index;"
+    [cell]="cell"
+    [row]="row"
+    [column]="column"
+    [class.selected]="sheet.activeCell===cell"
+    (onSelect)="select($event)"
+  ></cell>
+</div>
+
+<keypad 
+  *ngIf="sheet.activeCell" 
+  [cell]="sheet.activeCell"></keypad>

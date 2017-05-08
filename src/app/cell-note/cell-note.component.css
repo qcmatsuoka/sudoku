@@ -1,0 +1,15 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  font-size: 12px;
+  color: #333;
+  display: inline-block;
+  margin-top: 1px;
+  width: 13px;
+}
+

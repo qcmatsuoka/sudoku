@@ -1,0 +1,19 @@
+<cell-locked 
+  *ngIf="isLocked()"
+  [number]="cell.lockedNumber"
+></cell-locked>
+
+<div *ngIf="!isLocked()" 
+  class="clickable"
+  [class.selected]="selected"
+  (click)="select()"
+>
+  <cell-input
+    *ngIf="isInput()"
+    [number]="cell.inputNumber"
+  ></cell-input>
+  <cell-note
+    *ngIf="isNote()"
+    [numbers]="cell.noteNumbers"
+  ></cell-note>
+</div>
