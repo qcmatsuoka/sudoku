@@ -34,12 +34,9 @@ export class KeypadComponent implements OnInit {
   numberSelected(value: number): void {
     if (this.cell.hasNumber(value)) {
       this.cell.removeNumber(value);
-    } else {
-      if (this.cell.getMode() === Mode.Note && this.cell.noteNumbers.length == 4) {
-        return;
-      }
-      this.cell.addNumber(value);
     }
+
+    this.cell.addNumber(value);
   }
 
   clear() {
