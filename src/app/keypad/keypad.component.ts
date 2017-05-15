@@ -41,6 +41,11 @@ export class KeypadComponent implements OnInit {
 
   clear() {
     this.cell.clear();
+
+    // TODO メモステートの時にクリアしたら入力ステートに切り替えるか？
+    if (this.cell.getMode() === Mode.Input && this.cell.hasAnyNumber(Mode.Note)) {
+      this.cell.setMode(Mode.Note);
+    }
   }
 
   isActiveNumber(value: number): boolean {

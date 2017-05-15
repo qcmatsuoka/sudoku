@@ -11,6 +11,7 @@ export interface Cell {
   hasNumber(value: number, mode?: Mode): boolean
   addNumber(value: number, mode?: Mode): void
   removeNumber(value: number, mode?: Mode): void
+  hasAnyNumber(mode: Mode): boolean|never
   clear(mode?: Mode): void
 }
 
@@ -37,6 +38,14 @@ class CellImpl implements Cell {
     this.mode = mode;
   }
 
+  /**
+   * switch文でModeが全て列挙されていない場合に、コンパイルエラーを発生させる
+   * @param {Mode} mode
+   */
+  assertNever(mode: never): never {
+    throw new Error(`Unexpected mode: ${mode}`);
+  }
+
   hasNumber(value: number, mode?: Mode): boolean {
     switch (mode || this.getMode()) {
       case Mode.Input: 
@@ -46,6 +55,19 @@ class CellImpl implements Cell {
       default: 
         // TODO enumを全列挙していない時に自動的に例外になった気がする
         throw new Error(`Not supported mode [${mode}]`);
+    }
+  }
+
+  hasAnyNumber(mode: Mode): boolean|never {
+    switch (mode) {
+      case Mode.Input:
+        return !!this.inputNumber;
+      case Mode.Note:
+        return this.noteNumbers.length > 0;
+      case Mode.Locked:
+        return !!this.lockedNumber;
+      default:
+        return this.assertNever(mode);
     }
   }
 
