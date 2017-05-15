@@ -46,15 +46,18 @@ class CellImpl implements Cell {
     throw new Error(`Unexpected mode: ${mode}`);
   }
 
-  hasNumber(value: number, mode?: Mode): boolean {
-    switch (mode || this.getMode()) {
-      case Mode.Input: 
+  hasNumber(value: number, mode?: Mode): boolean|never {
+    const m = mode || this.getMode();
+
+    switch (m) {
+      case Mode.Input:
         return this.inputNumber === value;
-      case Mode.Note: 
+      case Mode.Note:
         return this.noteNumbers.indexOf(value) !== -1;
-      default: 
-        // TODO enumを全列挙していない時に自動的に例外になった気がする
-        throw new Error(`Not supported mode [${mode}]`);
+      case Mode.Locked:
+        return this.inputNumber === value;
+      default:
+        this.assertNever(m);
     }
   }
 
@@ -105,16 +108,20 @@ class CellImpl implements Cell {
   }
 
   clear(mode?: Mode): void {
-    switch (mode || this.getMode()) {
-      case Mode.Input: 
+    const m = mode || this.getMode();
+
+    switch (m) {
+      case Mode.Input:
         this.inputNumber = null;
         break;
-      case Mode.Note: 
+      case Mode.Note:
         this.noteNumbers = [];
         break;
-      default: 
-        // TODO enumを全列挙していない時に自動的に例外になった気がする
-        throw new Error(`Not supported mode [${mode}]`);
+      case Mode.Locked:
+        this.lockedNumber = null;
+        break;
+      default:
+        this.assertNever(m);
     }
   }
 }
