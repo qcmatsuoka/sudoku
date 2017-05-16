@@ -23,10 +23,14 @@ export class GameComponent implements OnInit {
     this.sheet = sheetFactory(9, 9);
   }
 
-  create(): void {
+  gameNumbers(): number[] {
+    return this.puzzleRepository.gameNumbers();
+  };
+
+  create(indexOfGame: number): void {
     this.clear();
 
-    this.puzzleRepository.get().forEach((cell: Cell) => {
+    this.puzzleRepository.get(indexOfGame).forEach((cell: Cell) => {
       this.sheet.setCell(cell);
     });
   }
