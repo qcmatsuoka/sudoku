@@ -13,3 +13,9 @@ li {
   width: 13px;
 }
 
+span {
+  display: block; /* <cell-note>がブロック要素でないためpaddingを持たせるために必要 */
+  padding: 3px 5px;
+  word-wrap: break-word;
+}
+
