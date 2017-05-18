@@ -15,7 +15,7 @@ li {
 
 span {
   display: block; /* <cell-note>がブロック要素でないためpaddingを持たせるために必要 */
-  padding: 3px 5px;
+  padding: 2px;
   word-wrap: break-word;
 }
 
