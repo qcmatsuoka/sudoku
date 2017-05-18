@@ -5,6 +5,10 @@ import { problems } from '../problems';
 @Injectable()
 export class PuzzleRepository {
   get(indexOfGame: number): Cell[] {
+    if (!problems[indexOfGame]) {
+      throw new Error('Logic error. Got out of range index [' + indexOfGame + '].');
+    }
+
     return this.flatten(problems[indexOfGame]).map((n: number, i: number) => {
       return factory(Math.floor(i / 9), i % 9, n);
     });
