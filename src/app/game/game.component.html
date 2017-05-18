@@ -5,7 +5,7 @@
     <option selected></option>
     <option
         value="{{n}}"
-        *ngFor="let n of gameNumbers()"
-    >問題 {{n}}</option>
+        *ngFor="let n of gameIndexes()"
+    >問題 {{n + 1}}</option>
 </select>
 <sheet [sheet]="sheet"></sheet>

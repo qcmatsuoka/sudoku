@@ -23,8 +23,8 @@ export class GameComponent implements OnInit {
     this.sheet = sheetFactory(9, 9);
   }
 
-  gameNumbers(): number[] {
-    return this.puzzleRepository.gameNumbers();
+  gameIndexes(): number[] {
+    return this.puzzleRepository.gameIndexes();
   };
 
   create(indexOfGame: number): void {
