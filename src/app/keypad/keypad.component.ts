@@ -34,16 +34,19 @@ export class KeypadComponent implements OnInit {
   numberSelected(value: number): void {
     if (this.cell.hasNumber(value)) {
       this.cell.removeNumber(value);
-    } else {
-      if (this.cell.getMode() === Mode.Note && this.cell.noteNumbers.length == 4) {
-        return;
-      }
-      this.cell.addNumber(value);
+      return;
     }
+
+    this.cell.addNumber(value);
   }
 
   clear() {
     this.cell.clear();
+
+    // TODO メモステートの時にクリアしたら入力ステートに切り替えるか？
+    if (this.cell.getMode() === Mode.Input && this.cell.hasAnyNumber(Mode.Note)) {
+      this.cell.setMode(Mode.Note);
+    }
   }
 
   isActiveNumber(value: number): boolean {
